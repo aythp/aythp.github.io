@@ -1,0 +1,24 @@
+Technical Requirements
+Your game must meet the following technical requirements:
+·Render a game in the browser.
+·Have logic for winning and/or losing and show feedback to the player in either case:
+·Your game must have logic that allows the player to win or lose.
+·Your game code must be organized in separate files for HTML, CSS, and JavaScript.
+·Use plain JavaScript for DOM manipulation.
+·Your game entities and elements must be organized using classes and OOP.
+·Have a repo on GitHub.
+·Have at least one (1) commit per day that you worked on.
+·You must deploy your game online using GitHub Pages so anyone can play it.
+·YouYour code should follow the principles of KISS (Keep It Simple Stupid) and DRY (Don’t Repeat Yourself).
+
+Deliverables
+·A working game, built by you, that runs in the browser.
+·Your game deployed on GitHub Pages and available online.
+·The URL of the deployed game available online.
+·The URL of the GitHub repository for your game.
+·The URL of the slides for your project presentation.
+·You must present your game during Module 1 project presentations (last day of Module 1 project).
+
+EXAMPLES:
+https://www.mathsisfun.com/games/simon-says.html
+https://www.juegos-mentales.com/juego/Simon+Says

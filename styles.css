@@ -1,0 +1,104 @@
+body {
+display: inline-grid;
+place-items: center;
+width: 100%;
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+background-color: rgb(42, 36, 36);
+color: white;
+}
+
+.title{
+    padding-top: 35px;
+}
+
+.simon{
+    position: relative;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.buttonContainer{
+    display: inline-grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto;
+    transform: rotate(45deg)
+}
+
+.square{
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.square:active, .active{
+    filter:brightness(125%);
+}
+
+.red{
+background-color: rgb(228, 49, 49);
+border-radius: 25px;
+border-width: 2.5px;
+  border-style: solid;
+  border-color: white;
+}
+
+.blue{
+background-color: rgb(57, 57, 190);
+border-radius: 25px;
+border-width: 2.5px;
+  border-style:solid;
+  border-color: white;
+}
+
+.yellow{
+background-color: rgb(218, 201, 72);
+border-radius: 25px;
+border-width: 2.5px;
+  border-style: solid;
+  border-color: white;
+}
+
+.green{
+background-color: green;
+border-radius: 25px;
+border-width: 2.5px;
+  border-style: solid;
+  border-color: white;
+}
+
+.difficulties {
+    text-align: center; 
+    padding-top: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.difficulties #normal-difficulty{
+    display: block;
+    padding-top: 5px;
+    cursor:pointer;
+}
+
+.difficulties #medium-difficulty{
+    display: block;
+    padding-top: 5px;
+    cursor: pointer;
+    color:gray
+}
+
+.difficulties #hard-difficulty{
+    display: block;
+    padding-top: 5px;
+    cursor: pointer;
+    color:gray;
+}
+
+.difficulties #impossible-difficulty{
+    display: block;
+    padding-top: 5px;
+    cursor:pointer;
+    color:gray;
+}

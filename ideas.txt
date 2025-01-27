@@ -1,0 +1,12 @@
+IDEAS.
+
+El usuario tiene que introducir su nombre nada más empezar. 
+Cada dificultad tiene su propio record.
+Cada vez que se acierte se suma uno al contador y si supera el record se establece un nuevo record.
+
+Hacer tres dificultades:
+
+En EASY MODE es el simon dice normal.
+En MEDIUM MODE es lo mismo pero mas rápido. 
+en HARD MODE el los botones empiezan a girar.
+en IMPOSIBLE 
