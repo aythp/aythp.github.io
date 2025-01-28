@@ -76,6 +76,7 @@ border-width: 2.5px;
     align-items: center;
 }
 
+
 .difficulties #normal-difficulty{
     display: block;
     padding-top: 5px;
@@ -102,3 +103,36 @@ border-width: 2.5px;
     cursor:pointer;
     color:gray;
 }
+
+#startButton {
+    position: absolute;
+    top: 50%;
+    right: -100px; 
+    transform:rotate(135deg);
+    width: 200px;
+    height:120px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-width: 2.5px;
+  border-style:solid;
+  border-color: black;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%)
+}
+
+#startButton img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    transform: rotate(-15deg) translateX(-10px);
+}
+
+#startButton:active{
+    filter:brightness(125%);
+}
+
