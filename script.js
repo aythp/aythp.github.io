@@ -1,8 +1,9 @@
 const squares = document.querySelectorAll(".square");
 const roundDisplay = document.getElementById("round");
 const recordDisplay = document.getElementById("record");
-const startButton = document.getElementById("startButton");
+const startButton = document.querySelector(".startButton");
 const difficultyButtons = document.querySelectorAll(".difficulties div");
+//const gameIntro = document.getElementById("game-intro")
 
 class SimonSays {
   constructor(squares, roundDisplay, recordDisplay, startButton, difficultyButtons) {
@@ -19,10 +20,19 @@ class SimonSays {
 
     this.difficulties = {
       normal: { speed: 1000, record: 0, round: 0 },
-      medium: { speed: 600, record: 0, round: 0 },
+      medium: { speed: 500, record: 0, round: 0 },
       hard: { speed: 200, record: 0, round: 0 },
       impossible: { speed: 1000, record: 0, round: 0 },
     };
+
+    this.errorSound = new Audio("")
+
+    this.buttonSounds = [
+      new Audio ("./sounds/sounds_1.mp3"),
+      new Audio ("./sounds/sounds_2.mp3"),
+      new Audio ("./sounds/sounds_3.mp3"),
+      new Audio ("./sounds/sounds_4.mp3")
+    ]
 
     this.addDifficultyListeners();
     this.addStartButtonListener();
@@ -35,17 +45,15 @@ class SimonSays {
         if (this.unlockedDifficulties.includes(difficulty)) {
           this.difficulty = difficulty;
 
-          // Reiniciar ronda y mostrar récord correspondiente a la dificultad seleccionada
           this.difficulties[difficulty].round = 0;
           this.updateDisplay();
 
-          // Resetear estilos y rotaciones si no es "hard"
           if (difficulty !== "hard") {
             this.resetButtonRotation();
           }
 
-          this.difficultyButtons.forEach((btn) => (btn.style.color = "gray")); // Resetear colores
-          button.style.color = "white"; // Resaltar la selección
+          this.difficultyButtons.forEach((btn) => (btn.style.color = "gray"));
+          button.style.color = "white";
         }
       });
     });
@@ -96,9 +104,7 @@ class SimonSays {
 
   resetButtonRotation() {
     const buttonContainer = document.querySelector(".buttonContainer");
-    buttonContainer.innerHTML = ""; // Vaciar el contenedor
-
-    // Restaurar los botones en su orden original
+    buttonContainer.innerHTML = "";
     this.squares.forEach((square) => {
       buttonContainer.appendChild(square);
     });
@@ -110,7 +116,6 @@ class SimonSays {
 
     this.sequence.forEach((square) => {
       setTimeout(() => {
-        // Solo activar los cuadrados si no es dificultad "impossible"
         if (this.difficulty !== "impossible") {
           this.activateSquare(square);
         }
@@ -134,6 +139,7 @@ class SimonSays {
     this.playerSequence = [];
     this.squares.forEach((square) => {
       square.addEventListener("click", this.handlePlayerInput);
+      
     });
   }
 
@@ -148,7 +154,6 @@ class SimonSays {
     const index = this.playerSequence.length;
 
     if (square === this.sequence[index]) {
-      // Resaltar al hacer clic incluso en dificultad "impossible"
       if (this.difficulty === "impossible") {
         this.activateSquare(square);
       }
@@ -172,6 +177,7 @@ class SimonSays {
     } else {
       this.resetGame();
     }
+    console.log("prueba click")
   };
 
   checkAndUnlockDifficulties() {
