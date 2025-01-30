@@ -6,40 +6,33 @@
     <title>Simon Says</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div id="game-intro">      
+        <img id="logo" src="./images/SimonSays-logo.png" alt="logo">
 
-    <!-- <div id="game-intro">
-        <img src="./images/SimonSays-logo.png" alt="logo">
-        <p>Introduce your name</p>
         <form id="name-form">
+            <p>Introduce your name</p>
             <input type="text" id="playerName" placeholder="">
-            <button type="button" id="startGame"><img src=".images/right-arrow.png"></button>
-        </form> -->
+            <button type="button" id="startGame"><img src="./images/arrow-right.png"></button>
+        </form>
+        <audio id="cyberpunk-music" loop>
+            <source src="./sounds/cyberpunk-music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div class="simon">
-
+        
         <div class="startButton">
             <button>
-                <img src="./images/play-button-arrowhead.png">
+                <img src="./images/play-button.png">
             </button>
         </div>
 
        <div class="backToMenu">
             <button>
-                <img src="./images/home.png">
+                <img src="./images/back-black.png">
             </button>
         </div>
-
-        <!-- <div class="records">
-            <ol start="1">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ol>
-        </div> -->
 
         <div class="buttonContainer">
             <div class="square red"></div>
@@ -59,8 +52,8 @@
             <div id="hard-difficulty">Hard🔒</div>
             <div id="impossible-difficulty">Impossible🔒</div>
         </div>
-
         <script src="script.js"></script>
+
     </div>
 </body>
 </html>

@@ -9,33 +9,45 @@ body {
     display: inline-grid;
     place-items: center;
     width: 100%;
-    font-family: 'Interceptor', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: rgb(42, 36, 36);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('./images/confetti.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.title{
-    padding-top: 35px;
-}
-
-.simon{
+.simon {
     position: relative;
-    margin-top: 100px;
-    padding: 20px;
-    border-radius: 10px;
+    display: none;
+    height: 100vh;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+    overflow: hidden;
 }
 
-.buttonContainer{
-    display: inline-grid;
+.buttonContainer {
+    position: absolute;
+    display: grid;
     grid-gap: 10px;
     grid-template-columns: auto auto;
-    transform: rotate(45deg)
+    transform: translate(-50%, -50%) rotate(45deg);
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    justify-items: center;
 }
 
 .square{
-    border-radius: 5px;
-    width: 150px;
-    height: 150px;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
     cursor: pointer;
 }
 
@@ -76,62 +88,79 @@ border-width: 2.5px;
 }
 
 .difficulties {
-    text-align: center; 
-    padding-top: 75px;
+    position: absolute;
+    bottom: 30px;
+    left: 20%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-shadow: 
+        -2px -2px 0 black, 
+        2px -2px 0 black,
+        -2px 2px 0 black,  
+        2px 2px 0 black; 
 }
-
 
 .difficulties #normal-difficulty{
     display: block;
-    padding-top: 5px;
     cursor:pointer;
+    font-size:x-large;
 }
 
-.difficulties #medium-difficulty{
-    display: block;
-    padding-top: 5px;
-    cursor: pointer;
-    color:gray
-}
-
-.difficulties #hard-difficulty{
+.difficulties #medium-difficulty, #hard-difficulty, #impossible-difficulty{
     display: block;
     padding-top: 5px;
     cursor: pointer;
     color:gray;
+    font-size: x-large;
 }
 
-.difficulties #impossible-difficulty{
-    display: block;
-    padding-top: 5px;
-    cursor:pointer;
-    color:gray;
-}
 .startButton {
     position: absolute;
-    top: 65%;
-    right: -50px; 
-    transform:rotate(135deg);
-    width: 200px;
-    height:120px;
-    cursor: pointer;
-    background-color: rgb(245, 220, 220);
-    border-radius: 5px;
-    padding: 0;
-    border-width: 2.5px;
-  border-style:solid;
-  border-color: black;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%)
+    bottom: 80px;      
+    right: 75px;       
+    width: 100px;       
+    height: 100px;      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .startButton img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-    transform: rotate(-15deg) translateX(-10px);
+    width: 75%;
+    height: 75%;
+    object-fit: contain; 
+}
+
+.backToMenu {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    width: 100px;       
+    height: 100px;      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.backToMenu img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain; 
+}
+
+.startButton button,
+.backToMenu button {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: active;
 }
 
 #game-intro {
@@ -142,22 +171,90 @@ border-width: 2.5px;
     height: 100vh;
 }
 
-.simon, .difficulties, #round, #record {
-    display: block;
-}
-
 #game-intro img{
     width: 50%;
 }
 
-.backToMenu{
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-    transform: rotate(-45deg) translateX(-140px);
+.records {
+    position: absolute;
+    top: 150px;
+    right: 250px;
+    color: white;
+    font-size: x-large;
 }
 
-.backToMenu img{
-    width: 25%;
-    height: 25%
+.roundRecord {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 
+        -2px -2px 0 black, 
+        2px -2px 0 black,
+        -2px 2px 0 black,  
+        2px 2px 0 black; 
+    font-size: x-large;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes blink {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.unlocked-animation {
+    animation: blink 0.5s ease-in-out 1.5;
+}
+
+#logo {
+    animation: pulse 2s ease-in-out infinite;
+    width: 500px;
+    height: auto;
+}
+
+#name-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#name-form p {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 
+        -2px -2px 0 black, 
+        2px -2px 0 black,
+        -2px 2px 0 black,  
+        2px 2px 0 black; 
+}
+#playerName {
+    font-size: 18px;
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+}
+
+#startGame {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#startGame img {
+    width: 75px;
+    height: 75px;
 }
