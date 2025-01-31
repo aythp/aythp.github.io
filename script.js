@@ -14,7 +14,8 @@ const playerNameInput = document.getElementById("playerName");
 //clase
 class SimonSays {
     constructor(squares, roundDisplay, recordDisplay, startButton, difficultyButtons, startGameButton) {
-        // inicializa las propiedades del juego
+
+        //inicializa las propiedades del juego
         this.squares = squares;
         this.roundDisplay = roundDisplay;
         this.recordDisplay = recordDisplay;
@@ -33,7 +34,7 @@ class SimonSays {
         // nombre del jugador
         this.playerName = "";
 
-        // configuración de las dificultades disponibles
+        //dificultades disponibles
         this.difficulties = {
             normal: { speed: 1000, record: 0, round: 0 },
             medium: { speed: 500, record: 0, round: 0 },
@@ -41,7 +42,7 @@ class SimonSays {
             impossible: { speed: 1000, record: 0, round: 0 },
         };
 
-        // sonidos asociados a cada cuadrado
+        //sonidos de cada cuadrado
         this.buttonSounds = [
             new Audio("./sounds/sounds_1.mp3"),
             new Audio("./sounds/sounds_2.mp3"),
@@ -49,7 +50,7 @@ class SimonSays {
             new Audio("./sounds/sounds_4.mp3"),
         ];
 
-        // sonido de error cuando el jugador falla
+        //sonido de error
         this.errorSound = new Audio("./sounds/error.mp3");
 
         // asigna un sonido a cada cuadrado
@@ -66,7 +67,7 @@ class SimonSays {
         this.disableDifficultyButtons();
     }
 
-    // método para iniciar el juego
+    // iniciar el juego
     startGame() {
         // obtiene el nombre del jugador
         this.playerName = playerNameInput.value.trim();
@@ -80,7 +81,7 @@ class SimonSays {
         this.playSequence();
     }
 
-    // método para reiniciar el juego
+    // reiniciar el juego
     resetGame() {
         this.sequence = [];
         this.playerSequence = [];
@@ -88,7 +89,7 @@ class SimonSays {
         this.updateDisplay();
     }
 
-    // método para agregar un nuevo paso a la secuencia
+    //agregar un nuevo paso a la secuencia
     addStepToSequence() {
         const randomIndex = Math.floor(Math.random() * this.squares.length);
         this.sequence.push(this.squares[randomIndex]);
@@ -101,7 +102,7 @@ class SimonSays {
         }
     }
 
-    // método para reproducir la secuencia actual
+    // reproducir la secuencia actual
     playSequence() {
         let delay = 0;
         this.disablePlayerInput();
@@ -121,7 +122,7 @@ class SimonSays {
         }, delay);
     }
 
-    // método para habilitar la entrada del jugador
+    //habilitar la entrada del jugador
     enablePlayerInput() {
         this.playerSequence = [];
         this.squares.forEach((square) => {
@@ -129,14 +130,14 @@ class SimonSays {
         });
     }
 
-    // método para deshabilitar la entrada del jugador
+    //deshabilitar la entrada del jugador
     disablePlayerInput() {
         this.squares.forEach((square) => {
             square.removeEventListener("click", this.handlePlayerInput);
         });
     }
 
-    // método que maneja la entrada del jugador
+    //maneja la entrada del jugador
     handlePlayerInput = (event) => {
         const square = event.target;
         const index = this.playerSequence.length;
@@ -175,7 +176,7 @@ class SimonSays {
         }
     };
 
-    // método para verificar y desbloquear nuevas dificultades
+    //verificar y desbloquear nuevas dificultades
     checkAndUnlockDifficulties() {
         if (this.difficulties[this.difficulty].record === 5) {
             if (this.difficulty === "normal" && !this.unlockedDifficulties.includes("medium")) {
@@ -189,9 +190,12 @@ class SimonSays {
                 this.updateDifficultyButton("impossible-difficulty");
             }
         }
+    
+        //actualizar la leaderboard
+        updateLeaderboard(this.difficulty, this.playerName, this.difficulties[this.difficulty].record);
     }
 
-    // método para actualizar el estilo de los botones de dificultad desbloqueados
+    //actualizar el estilo de los botones de dificultad desbloqueados
     updateDifficultyButton(buttonId) {
         const button = document.getElementById(buttonId);
         button.textContent = button.textContent.replace("🔒", "");
@@ -205,14 +209,14 @@ class SimonSays {
         }, 1500);
     }
 
-    // método para actualizar la pantalla con la ronda y el récord actual
+    //actualizar la pantalla con la ronda y el récord actual
     updateDisplay() {
         const currentDifficulty = this.difficulties[this.difficulty];
         this.roundDisplay.textContent = `ROUND: ${currentDifficulty.round}`;
         this.recordDisplay.textContent = `RECORD: ${currentDifficulty.record}`;
     }
 
-    // método para deshabilitar los botones de dificultad no desbloqueados
+    //deshabilitar los botones de dificultad no desbloqueados
     disableDifficultyButtons() {
         this.difficultyButtons.forEach((button) => {
             if (!this.unlockedDifficulties.includes(button.id.replace("-difficulty", ""))) {
@@ -221,7 +225,7 @@ class SimonSays {
         });
     }
 
-    // método para habilitar todos los botones de dificultad
+    //habilitar todos los botones de dificultad
     enableDifficultyButtons() {
         this.difficultyButtons.forEach((button) => {
             button.style.pointerEvents = "auto";
@@ -229,7 +233,7 @@ class SimonSays {
     }
 }
 
-// función para activar visualmente un cuadrado
+//activar visualmente un cuadrado
 function activateSquare(square, speed) {
     square.classList.add("active");
     setTimeout(() => {
@@ -237,7 +241,7 @@ function activateSquare(square, speed) {
     }, speed / 2);
 }
 
-// función para rotar los botones en la dificultad "hard"
+//rotar los botones en la dificultad "hard"
 function rotateButtons(squares) {
     const buttonContainer = document.querySelector(".buttonContainer");
     const buttons = Array.from(buttonContainer.querySelectorAll(".square"));
@@ -248,7 +252,7 @@ function rotateButtons(squares) {
     buttonContainer.insertBefore(lastButton, buttons[0]);
 }
 
-// función para restablecer la rotación de los botones
+//restablecer la rotación de los botones
 function resetButtonRotation(squares) {
     const buttonContainer = document.querySelector(".buttonContainer");
     buttonContainer.innerHTML = "";
@@ -257,7 +261,7 @@ function resetButtonRotation(squares) {
     });
 }
 
-// función para añadir listeners a los botones de dificultad
+//añadir listeners a los botones de dificultad
 function addDifficultyListeners(difficultyButtons, simonGame) {
     difficultyButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -277,8 +281,7 @@ function addDifficultyListeners(difficultyButtons, simonGame) {
         });
     });
 }
-
-// función para añadir un listener al botón de inicio
+//añadir un listener al botón de inicio
 function addStartButtonListener(startButton, simonGame) {
     startButton.addEventListener("click", () => {
         if (!simonGame.difficulty) {
@@ -289,37 +292,36 @@ function addStartButtonListener(startButton, simonGame) {
     });
 }
 
-// función para añadir un listener al botón de comenzar el juego
+//añadir un listener al botón de comenzar el juego
 function addStartGameButtonListener(startGameButton, gameIntro) {
     startGameButton.addEventListener("click", () => {
         showSimonGame();
     });
 }
 
-// función para mostrar la pantalla del juego
+//mostrar la pantalla del juego
 function showSimonGame() {
     gameIntro.style.display = "none";
     simonGameDiv.style.display = "block";
     cyberpunkMusic.pause();
 }
 
-// función para mostrar la pantalla de introducción
+//función para mostrar la pantalla de introducción
 function showGameIntro() {
     simonGameDiv.style.display = "none";
     gameIntro.style.display = "flex";
     cyberpunkMusic.play();
 }
 
-// añade un listener al botón de comenzar el juego para mostrar la pantalla del juego
+//botón de comenzar el juego para mostrar la pantalla del juego
 startGameButton.addEventListener("click", showSimonGame);
 
-// añade un listener al botón de volver al menú para mostrar la pantalla de introducción
+//botón de volver al menú para mostrar la pantalla de introducción
 backToMenuButton.addEventListener("click", showGameIntro);
 
-// muestra la pantalla de introducción al cargar la página
+//muestra la pantalla de introducción al cargar la página
 showGameIntro();
 
-// cuando el DOM está completamente cargado, inicializa el juego
 document.addEventListener("DOMContentLoaded", () => {
     const simonGame = new SimonSays(
         squares,
@@ -335,4 +337,51 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gameIntro.style.display !== "none") {
         cyberpunkMusic.play();
     }
+
+    //inicializar la leaderboard para la dificultad seleccionada
+    const currentDifficulty = 'normal'; // Cambia esto según la dificultad seleccionada
+    const leaderboard = JSON.parse(localStorage.getItem(`leaderboard-${currentDifficulty}`)) || [];
+    displayLeaderboard(leaderboard);
 });
+
+function updateLeaderboard(difficulty, playerName, round) {
+    const leaderboardKey = `leaderboard-${difficulty}`;
+    let leaderboard = JSON.parse(localStorage.getItem(leaderboardKey)) || [];
+
+    //verificar si el nuevo score es mayor que el existente
+    const existingEntry = leaderboard.find(entry => entry.playerName === playerName);
+    if (existingEntry) {
+        if (round > existingEntry.round) {
+            existingEntry.round = round;
+        }
+    } else {
+        leaderboard.push({ playerName, round });
+    }
+
+    //mantener solo los top 3
+    leaderboard.sort((a, b) => b.round - a.round);
+    leaderboard = leaderboard.slice(0, 3);
+
+    //guardar en localstorage
+    localStorage.setItem(leaderboardKey, JSON.stringify(leaderboard));
+
+    //actualizar
+    displayLeaderboard(leaderboard);
+}
+
+function displayLeaderboard(leaderboard) {
+    const leaderboardList = document.querySelector('#leaderboard-list');
+    leaderboardList.innerHTML = '';
+
+    leaderboard.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.playerName}: ${entry.round}`;
+        leaderboardList.appendChild(li);
+    });
+}
+
+//cambiar de dificultad y actualizar la leaderboard
+function changeDifficulty(newDifficulty) {
+    const leaderboard = JSON.parse(localStorage.getItem(`leaderboard-${newDifficulty}`)) || [];
+    displayLeaderboard(leaderboard);
+}
